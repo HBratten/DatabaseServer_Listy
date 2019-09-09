@@ -27,22 +27,23 @@ eventRouter.post("/event", (req, res) => {
     });
 });
 
-// eventRouter.put("/event/:id", (req, res) => {
-//   pool
-//     .query(
-//       "update event set event_item=$1::text, event_date=$2::date, event_priority=$3::text, event_notes=$4::text where id=$5::int",
-//       [
-//         req.body.event_item,
-//         req.body.event_date,
-//         req.body.event_priority,
-//         req.body.event_notes,
-//         req.params.id
-//       ]
-//     )
-//     .then(() => {
-//       selectAllEvents(req, res);
-//     });
-// });
+eventRouter.put("/event/:id", (req, res) => {
+  pool
+    .query(
+      "update event set event_name=$1::text, event_address=$2::text, event_time=$3::time, event_date=$4::date, event_notes=$5::text where id=$6::int",
+      [
+        req.body.event_name,
+        req.body.event_address,
+        req.body.event_time,
+        req.body.event_date,
+        req.body.event_notes,
+        req.params.id
+      ]
+    )
+    .then(() => {
+      selectAllEvents(req, res);
+    });
+});
 
 // eventRouter.delete("/event/:id", (req, res) => {
 //   pool.query("delete from event where id=$1::int", [req.params.id]).then(() => {
