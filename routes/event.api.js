@@ -45,10 +45,10 @@ eventRouter.put("/event/:id", (req, res) => {
     });
 });
 
-// eventRouter.delete("/event/:id", (req, res) => {
-//   pool.query("delete from event where id=$1::int", [req.params.id]).then(() => {
-//     selectAllEvents(req, res);
-//   });
-// });
+eventRouter.delete("/event/:id", (req, res) => {
+  pool.query("delete from event where id=$1::int", [req.params.id]).then(() => {
+    selectAllEvents(req, res);
+  });
+});
 
 module.exports = eventRouter;
