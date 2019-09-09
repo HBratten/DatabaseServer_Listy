@@ -49,12 +49,12 @@ router.put("/to_do_and_events/:id", (req, res) => {
     });
 });
 
-// router.delete("/to_do_and_events/1", (req, res) => {
-//   pool
-//     .query("delete from to_do_and_events where id=$1::int", [req.params.id])
-//     .then(() => {
-//       selectAllList(req, res);
-//     });
-// });
+router.delete("/to_do_and_events/:id", (req, res) => {
+  pool
+    .query("delete from to_do_and_events where id=$1::int", [req.params.id])
+    .then(() => {
+      selectAllList(req, res);
+    });
+});
 
 module.exports = router;
