@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const pool = require("../connection/connection");
 
 router.get("/to_do_and_events", (req, res) => {
   res.send("GET WORKS!!!");
