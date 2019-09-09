@@ -43,12 +43,10 @@ toDoRouter.put("/to_do/:id", (req, res) => {
     });
 });
 
-// toDoRouter.delete("/to_do/:id", (req, res) => {
-//   pool
-//     .query("delete from to_do where id=$1::int", [req.params.id])
-//     .then(() => {
-//       selectAllList(req, res);
-//     });
-// });
+toDoRouter.delete("/to_do/:id", (req, res) => {
+  pool.query("delete from to_do where id=$1::int", [req.params.id]).then(() => {
+    selectAllList(req, res);
+  });
+});
 
 module.exports = toDoRouter;
