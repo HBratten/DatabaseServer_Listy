@@ -26,25 +26,22 @@ toDoRouter.post("/to_do", (req, res) => {
     });
 });
 
-// toDoRouter.put("/to_do/:id", (req, res) => {
-//   pool
-//     .query(
-//       "update to_do set to_do_item=$1::text, to_do_date=$2::date, to_do_priority=$3::text, event_name=$4::text, event_address=$5::text, event_time=$6::time, event_date=$7::date where id=$8::int",
-//       [
-//         req.body.to_do_item,
-//         req.body.to_do_date,
-//         req.body.to_do_priority,
-//         req.body.event_name,
-//         req.body.event_address,
-//         req.body.event_time,
-//         req.body.event_date,
-//         req.params.id
-//       ]
-//     )
-//     .then(() => {
-//       selectAllList(req, res);
-//     });
-// });
+toDoRouter.put("/to_do/:id", (req, res) => {
+  pool
+    .query(
+      "update to_do set to_do_item=$1::text, to_do_date=$2::date, to_do_priority=$3::text, to_do_notes=$4::text where id=$5::int",
+      [
+        req.body.to_do_item,
+        req.body.to_do_date,
+        req.body.to_do_priority,
+        req.body.to_do_notes,
+        req.params.id
+      ]
+    )
+    .then(() => {
+      selectAllList(req, res);
+    });
+});
 
 // toDoRouter.delete("/to_do/:id", (req, res) => {
 //   pool
