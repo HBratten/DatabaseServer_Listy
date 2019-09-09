@@ -10,24 +10,21 @@ function selectAllList(req, res) {
 
 toDoRouter.get("/to_do", selectAllList);
 
-// toDoRouter.post("/to_do", (req, res) => {
-//   pool
-//     .query(
-//       "insert into to_do (to_do_item, to_do_date, to_do_priority, event_name, event_address, event_time, event_date) values ($1::text, $2::date, $3::text, $4::text, $5::text, $6::time, $7::date)",
-//       [
-//         req.body.to_do_item,
-//         req.body.to_do_date,
-//         req.body.to_do_priority,
-//         req.body.event_name,
-//         req.body.event_address,
-//         req.body.event_time,
-//         req.body.event_date
-//       ]
-//     )
-//     .then(() => {
-//       selectAllList(req, res);
-//     });
-// });
+toDoRouter.post("/to_do", (req, res) => {
+  pool
+    .query(
+      "insert into to_do (to_do_item, to_do_date, to_do_priority, to_do_notes) values ($1::text, $2::date, $3::text, $4::text)",
+      [
+        req.body.to_do_item,
+        req.body.to_do_date,
+        req.body.to_do_priority,
+        req.body.to_do_notes
+      ]
+    )
+    .then(() => {
+      selectAllList(req, res);
+    });
+});
 
 // toDoRouter.put("/to_do/:id", (req, res) => {
 //   pool
