@@ -3,9 +3,11 @@ const toDoRouter = express.Router();
 const pool = require("../connection/connection");
 
 function selectAllToDos(req, res) {
-  pool.query("select * from to_do").then(result => {
-    res.send(result.rows);
-  });
+  pool
+    .query("select * from to_do where to_do_date=$1::date;", [req.query.date])
+    .then(result => {
+      res.send(result.rows);
+    });
 }
 
 toDoRouter.get("/to_do", selectAllToDos);
