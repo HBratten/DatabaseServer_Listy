@@ -3,9 +3,11 @@ const eventRouter = express.Router();
 const pool = require("../connection/connection");
 
 function selectAllEvents(req, res) {
-  pool.query("select * from event").then(result => {
-    res.send(result.rows);
-  });
+  pool
+    .query("select * from event where event_date=$1::date;", [req.query.date])
+    .then(result => {
+      res.send(result.rows);
+    });
 }
 
 eventRouter.get("/event", selectAllEvents);
@@ -26,7 +28,7 @@ eventRouter.post("/event", (req, res) => {
     event_end_time,
     event_start_time
   } = req.body;
-// above is destructuring and assigning them to variable names
+  // above is destructuring and assigning them to variable names
 
   pool
     .query(
