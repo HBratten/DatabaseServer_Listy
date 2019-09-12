@@ -4,7 +4,13 @@ const pool = require("../connection/connection");
 
 function selectAllEvents(req, res) {
   pool
-    .query("select * from event where event_date=$1::date;", [req.query.date])
+    .query(
+      `
+  select * from event where event_date${
+    req.query.gt === "true" ? ">" : "="
+  }$1::date order by event_date;`,
+      [req.query.date]
+    )
     .then(result => {
       res.send(result.rows);
     });

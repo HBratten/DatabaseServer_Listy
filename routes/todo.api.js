@@ -4,7 +4,12 @@ const pool = require("../connection/connection");
 
 function selectAllToDos(req, res) {
   pool
-    .query("select * from to_do where to_do_date=$1::date;", [req.query.date])
+    .query(
+      `select * from to_do where to_do_date${
+        req.query.gt === "true" ? ">" : "="
+      }$1::date order by to_do_date;`,
+      [req.query.date]
+    )
     .then(result => {
       res.send(result.rows);
     });
