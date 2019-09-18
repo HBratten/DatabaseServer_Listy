@@ -52,7 +52,7 @@ eventRouter.post("/event", (req, res) => {
 eventRouter.put("/event/:id", (req, res) => {
   pool
     .query(
-      "event_name=$1::text, event_address=$2::text, event_date=$3::date, event_notes=$4::text, starting_address=$5::text, starting_city=$6::text, starting_state=$7::text, starting_zip=$8::int, event_city=$9::text, event_state=$10::text, event_zip=$11:int, event_end_time=$12::time, event_start_time=$13::time where id=$14::int",
+      "update event set event_name=$1::text, event_address=$2::text, event_date=$3::date, event_notes=$4::text, starting_address=$5::text, starting_city=$6::text, starting_state=$7::text, starting_zip=$8::int, event_city=$9::text, event_state=$10::text, event_zip=$11::int, event_end_time=$12::time, event_start_time=$13::time where id=$14::int",
       [
         req.body.event_name,
         req.body.event_address,
@@ -72,7 +72,7 @@ eventRouter.put("/event/:id", (req, res) => {
     )
     .then(() => {
       selectAllEvents(req, res);
-    });
+    }).catch(e => console.log(e));
 });
 
 eventRouter.delete("/event/:id", (req, res) => {
