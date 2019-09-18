@@ -13,5 +13,5 @@ app.use("/", eventRouter);
 app.use("/", mapRouter);
 app.use("/", weatherRouter);
 
-const port = 5252;
+const port = process.env.PORT;
 app.listen(port, () => console.log(`Server is running on PORT: ${port}.`));
